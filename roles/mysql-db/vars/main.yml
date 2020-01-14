@@ -1,0 +1,13 @@
+
+
+
+URL_TO_DOWNLOAD_JDBC_DRIVER: https://www.microsoft.com/en-us/download/confirmation.aspx?id=57782/sqljdbc_7.2.2.0_enu.tar.gz
+URL_TO_DOWNLOAD_SONARQUBE: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-{{ version }}.zip
+
+vpc_id: "vpc-0898f9e8409669ea5" 
+instance_type: "db.m4.large"
+database_instance: "sonarqube-mysql-instance"
+subnet_group: "subnet-0b2ff5f0d09226720"
+
+mysql_db_name: "sonar"
+RDS_Instance_endpoint: "{{ address }}"

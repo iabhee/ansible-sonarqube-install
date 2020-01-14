@@ -1,0 +1,17 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false 
+
+  roles:
+          #     - {role: 'sonarqube-ec2', tag: 'sonarqube-ec2'}
+     - {role: 'mysql-db', tag: 'mysql-db'}
+     - {role: 'sonarqube-ec2', tag: 'sonarqube-ec2'}
+- hosts: launched_db
+  gather_facts: false
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  roles:
+    - sonarqube-install

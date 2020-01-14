@@ -1,0 +1,17 @@
+# AWS Credentials
+aws_access_key: <ACCESS_KEY>
+aws_secret_key: <SECRET_KEY>
+aws_region:     "us-west-1"
+
+# SecurityGroup name
+sg_name: "SG_SonarQube"
+sg_name_description: "SG_SonarQube"
+
+# To be assigned from VPC roles
+vpc_id: "vpc-0898f9e8409669ea5" 
+keypair: "mynewkey"
+ami: "ami-024c80694b5b3e51a"
+instance_type: "t2.micro"
+public_subnet_id: "subnet-0b2ff5f0d09226720"
+instance_name: "sonarqube-ec2"
+ansible_ssh_private_key_file: "~/.ssh/mynewkey.pem"

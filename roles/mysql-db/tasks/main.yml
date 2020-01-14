@@ -1,0 +1,39 @@
+---
+
+- name: Create database instance
+  rds_instance:
+    engine: mysql
+    db_instance_identifier: sonarqube-db
+    aws_access_key: "AKIA27YODAEZF3247YQ4"
+    aws_secret_key: "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"
+    aws_region: us-west-1
+    instance_type: db.t2.micro
+    master_username: root
+    master_user_password: 1nsecure
+    allocated_storage: 10
+  register: dbinstance
+
+- name: Wait for the database to be created
+  wait_for: 
+      timeout: 3
+- name: Add new instance to host group
+  add_host:
+     hostname: "{{ dbinstance.endpoint.address }}"
+     groupname: launched_db
+  with_items: "{{ dbinstance.endpoint.address }}" 
+
+- name: Connect to RDS instance
+  mysql_user:
+    check_implicit_admin: truek
+    login_user: root
+    login_password: 1nsecure
+    login_port: 3306
+    login_host: "{{ dbinstance.endpoint.address }}"
+    host: "{{ dbinstance.endpoint.address }}" 
+    name: sonar
+    password: 1nsecure
+    priv: '*.*:GRANT'
+    state: present
+  with_items:
+    - "{{ dbinstance.endpoint.address }}"
+    
